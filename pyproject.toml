@@ -1,4 +1,4 @@
-git[tool.poetry]
+[tool.poetry]
 name = "course-work-3"
 version = "0.1.0"
 description = ""
@@ -6,8 +6,11 @@ authors = ["ekaterina <sychevaee@icloud.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^4.1.0"
 
 [build-system]
 requires = ["poetry-core"]
