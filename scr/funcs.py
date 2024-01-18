@@ -1,14 +1,13 @@
 import os
 import json
 from datetime import datetime
-from config import ROOT_DIR
-
-OPERATION = os.path.join(ROOT_DIR, "operations.json")
 
 
 def open_file():
     """функция открытия файла
     operation.json"""
+    ROOT_DIR = os.path.dirname(__file__)
+    OPERATION = os.path.join(ROOT_DIR, "operations.json")
     with open(OPERATION, encoding="UTF8") as file:
         file = json.load(file)
     return file
@@ -52,6 +51,7 @@ def hide_accounts_data(data):
 
 
 def bill_output(final_data):
+    result = []
     for item in final_data:
         if item.get('from') is None:
             continue
@@ -61,6 +61,6 @@ def bill_output(final_data):
         to = item['to']
         amount = item['operationAmount']['amount']
         currency = item['operationAmount']['currency']['name']
-        print(f"{date} {description}\n{from_} -> {to}\n{amount} {currency}\n")
+        result.append(f"{date} {description}\n{from_} -> {to}\n{amount} {currency}\n")
 
-    return
+    return result

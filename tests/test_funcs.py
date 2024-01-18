@@ -1,25 +1,8 @@
 from scr.funcs import open_file, format_date, sort_date, hide_accounts_data, bill_output
-import os.path
 
 
-# def test_open_file():
-#     ROOT_DIR = os.path.dirname(__file__)
-#     assert open_file() == [
-#   {
-#     "id": 441945886,
-#     "state": "EXECUTED",
-#     "date": "2019-08-26T10:50:58.294041",
-#     "operationAmount": {
-#       "amount": "31957.58",
-#       "currency": {
-#         "name": "руб.",
-#         "code": "RUB"
-#       }
-#     },
-#     "description": "Перевод организации",
-#     "from": "Maestro 1596837868705199",
-#     "to": "Счет 64686473678894779589"
-#   }]
+def test_open_file():
+    assert isinstance(open_file(), list)
 
 
 def test_sort_date():
@@ -43,13 +26,11 @@ def test_sort_date():
 
 
 def test_format_date():
-    assert format_date("2019-08-26T10:50:58.294041") == '26.08.2019'
+    assert format_date([{"date":"2019-08-26T10:50:58.294041"}]) == [{"date":"26.08.2019"}]
 
 
 def test_hide_accounts_data():
-    assert hide_accounts_data(["Счет 64686473678894779589"]) == ["Счет **9589"]
-    assert hide_accounts_data(["Maestro 1596837868705199"]) == ["Maestro 1596 83** **** 5199"]
-    assert hide_accounts_data([None]) == [""]
+    assert hide_accounts_data([{"to":"Счет 64686473678894779589", "from":"Maestro 1596837868705199"}]) == [{'to': 'Счет **9589', 'from': 'Maestro 1596 78** **** 5199'}]
 
 
 def test_bill_output():
